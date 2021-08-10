@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
 
-class Connection(ABC):
+class DriverInterface(ABC):
 
     @abstractmethod
-    def connection(self):
+    def driver_select(self):
         pass
