@@ -1,1 +1,0 @@
-DP_Observer quando alterar o estado de conex
