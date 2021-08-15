@@ -1,2 +1,0 @@
-from driver_interface import DriverInterface
-from printer_interface import PrinterInterface

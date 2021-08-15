@@ -1,25 +1,29 @@
-from abc import ABCMeta, abstractstaticmethod
+from abc import ABC, abstractmethod
 
-class IJato(metaclass=ABCMeta):
-    @abstractstaticmethod
-    def get_impressoraJato():
-        """interface da impressora"""
 
-class impjatoHP(IJato):
+class IJato(ABC):
+    @abstractmethod
+    def get_impressora_jato(self):
+        pass
+
+
+class ImpjatoHP(IJato):
     def __init__(self):
         self.marca = 'HP'
         self.model = 'HP Jato de tinta'
-    
-    def get_impressoraJato(self):
+
+    def get_impressora_jato(self):
         return {"Marca": self.marca, "Modelo": self.model}
 
-class impjatoEpson(IJato):
+
+class ImpjatoEpson(IJato):
     def __init__(self):
         self.marca = 'Epson'
         self.model = 'Epson Jato de tinta'
 
-    def get_impressoraJato(self):
+    def get_impressora_jato(self):
         return {"Marca": self.marca, "Modelo": self.model}
+
 
 class JatoFactory():
 
@@ -27,16 +31,17 @@ class JatoFactory():
     def get_jato(jatoFabrica):
         try:
             if jatoFabrica == "impjatoHP":
-                return impjatoHP()
+                return ImpjatoHP()
             if jatoFabrica == "impjatoEpson":
-                return impjatoEpson()
+                return ImpjatoEpson()
 
             raise AssertionError("Impressora não identificada")
         except AssertionError as _e:
             print(_e)
 
+
 if __name__ == "__main__":
-    JATO  = JatoFactory.get_jato("impjatoHP")
-    print (f"{JATO.__class__} : {JATO.get_impressoraJato()}")
-    JATO  = JatoFactory.get_jato("impjatoEpson")
-    print (f"{JATO.__class__} : {JATO.get_impressoraJato()}")
+    JATO = JatoFactory.get_jato("impjatoHP")
+    print(f"{JATO.__class__} : {JATO.get_impressora_jato()}")
+    JATO = JatoFactory.get_jato("impjatoEpson")
+    print(f"{JATO.__class__} : {JATO.get_impressora_jato()}")
