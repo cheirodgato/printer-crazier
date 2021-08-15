@@ -29,20 +29,16 @@ class ImplaserEpson(ILaser):
 class LaserFactory:
 
     @staticmethod
-    def get_laser(laserFabrica):
-        try:
-            if laserFabrica == "implaserHP":
-                return ImplaserHP()
-            if laserFabrica == "implaserEpson":
-                return ImplaserEpson()
+    def get_laser_hp(self):
+        return ImplaserHP()
 
-            raise AssertionError("Impressora não identificada")
-        except AssertionError as _e:
-            print(_e)
+    @staticmethod
+    def get_laser_epson(self):
+        return ImplaserEpson()
 
 
-if __name__ == "__main__":
-    laser = LaserFactory.get_laser("implaserHP")
-    print(f"{laser.__class__} : {laser.get_impressora_laser()}")
-    laser = LaserFactory.get_laser("implaserEpson")
-    print(f"{laser.__class__} : {laser.get_impressora_laser()}")
+# if __name__ == "__main__":
+#     laser = LaserFactory.get_laser("implaserHP")
+#     print(f"{laser.__class__} : {laser.get_impressora_laser()}")
+#     laser = LaserFactory.get_laser("implaserEpson")
+#     print(f"{laser.__class__} : {laser.get_impressora_laser()}")

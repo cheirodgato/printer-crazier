@@ -1,14 +1,10 @@
-from FabricaDeImpressora import ImpressoraFactory
+from FabricaDeImpressora import ImpressoraHPFactory, ImpressoraEpsonFactory
 
 
 class CriadorDeFabrica:
 
-    def fabrica_epson(self, tipo):
-        return ImpressoraFactory.get_impressora(tipo_impressora=tipo)
+    def fabrica_epson(self):
+        return ImpressoraEpsonFactory()
 
-    def fabrica_hp(self, tipo):
-        return ImpressoraFactory.get_impressora(tipo_impressora=tipo)
-
-
-if __name__ == "__main__":
-    epson = CriadorDeFabrica.fabrica_epson('impjatoHP')
+    def fabrica_hp(self):
+        return ImpressoraHPFactory()

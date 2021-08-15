@@ -1,10 +1,13 @@
+from typing import Type
+
 from CriadorDeFabrica import CriadorDeFabrica
-from FabricaDeImpressora import *
-from ImpressoraJatoDeTinta import *
-from ImpressoraLaser import *
+from FabricaDeImpressora import IFabricaDeImpressora
 
 class CentralPrint:
     impressorasDisponiveis = []
+
+    def __init__(self):
+        pass
 
     def __new__(cls):
         if not cls.__dict__.get('_instancia'):
@@ -15,30 +18,23 @@ class CentralPrint:
     def get_instancia(cls):
         return cls()
 
-    def gerar_impressora(fabrica):
-        impressoraLaser = fabrica.criarImpressaLaser()
-        impressoraJatoDeTinta = fabrica.criarImpressoraJatoDeTinta()
-        return [impressoraLaser, impressoraJatoDeTinta]
+    def make(self):
+        Laser = self.make_impressora_laser()
+        Jato = self.make_impressora_jato()
+        return [Laser, Jato]
 
     @classmethod
-    def criacao(cls):
-        fab = CriadorDeFabrica()
-        print('### Gerando fabricas')
-        fabEpson = fab.criarFabricaEpson()
-        fabHP = fab.criarFabricaHP()
-        print('### Gerando Impressoras')
-        cls.salvaImpressoras(cls.gerarImpressora(fabEpson))
-        cls.salvaImpressoras(cls.gerarImpressora(fabHP))
-        print('Impressoras criadas e disponpiveis para uso')
+    def create(cls):
+        Fabrica = CriadorDeFabrica()
+
+        EpsonLTDA = Fabrica.fabrica_epson()
+        HPLTDA = Fabrica.fabrica_hp()
+
+        cls.save(cls.make(EpsonLTDA))
+        cls.save(cls.make(HPLTDA))
+
         return 0
 
     @classmethod
-    def salvaImpressoras(cls, impressoras: []):
+    def save(cls, impressoras: []):
         cls.impressorasDisponiveis = cls.impressorasDisponiveis + impressoras
-
-    def testarImpressorasDisponiveis(self):
-        for impressora in self.impressorasDisponiveis:
-            impressora.imprimir()
-        print('Quantidade de impressoras ', len(self.impressorasDisponiveis))
-        return 0
-        return cls()

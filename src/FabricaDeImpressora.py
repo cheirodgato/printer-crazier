@@ -6,23 +6,27 @@ from ImpressoraLaser import LaserFactory
 class IFabricaDeImpressora(ABC):
 
     @abstractmethod
-    def get_impressora(self, tipo_impressora):
+    def make_impressora_laser(self) -> object:
+        pass
+
+    @abstractmethod
+    def make_impressora_jato(self) -> object:
         pass
 
 
-class ImpressoraFactory(IFabricaDeImpressora):
+class ImpressoraHPFactory(IFabricaDeImpressora):
 
-    def get_impressora(self, tipo_impressora):
-        try:
-            if tipo_impressora == "impjatoHP":
-                return JatoFactory.get_jato(tipo_impressora)
-            elif tipo_impressora == "implaserEpson":
-                return LaserFactory.get_laser(tipo_impressora)
-            raise AssertionError("Impressora não encontrada")
-        except AssertionError as _e:
-            print(_e)
-        return None
+    def make_impressora_laser(self):
+        return LaserFactory.get_laser_hp()
 
-if __name__ == "__main__":
-    impressora = ImpressoraFactory.get_impressora
-    print(f"{impressora.__class__} : {impressora.get_impressora_jato()}")
+    def make_impressora_jato(self):
+        return JatoFactory.get_jato_hp()
+
+
+class ImpressoraEpsonFactory(IFabricaDeImpressora):
+
+    def make_impressora_laser(self):
+        return LaserFactory.get_laser_epson(self)
+
+    def make_impressora_jato(self):
+        return JatoFactory.get_jato_epson(self)

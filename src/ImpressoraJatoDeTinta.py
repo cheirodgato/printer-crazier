@@ -25,23 +25,18 @@ class ImpjatoEpson(IJato):
         return {"Marca": self.marca, "Modelo": self.model}
 
 
-class JatoFactory():
+class JatoFactory:
 
     @staticmethod
-    def get_jato(jatoFabrica):
-        try:
-            if jatoFabrica == "impjatoHP":
-                return ImpjatoHP()
-            if jatoFabrica == "impjatoEpson":
-                return ImpjatoEpson()
+    def get_jato_hp():
+        return ImpjatoHP()
 
-            raise AssertionError("Impressora não identificada")
-        except AssertionError as _e:
-            print(_e)
+    @staticmethod
+    def get_jato_epson():
+        return ImpjatoEpson()
 
-
-if __name__ == "__main__":
-    JATO = JatoFactory.get_jato("impjatoHP")
-    print(f"{JATO.__class__} : {JATO.get_impressora_jato()}")
-    JATO = JatoFactory.get_jato("impjatoEpson")
-    print(f"{JATO.__class__} : {JATO.get_impressora_jato()}")
+# if __name__ == "__main__":
+#     JATO = JatoFactory.get_jato("impjatoHP")
+#     print(f"{JATO.__class__} : {JATO.get_impressora_jato()}")
+#     JATO = JatoFactory.get_jato("impjatoEpson")
+#     print(f"{JATO.__class__} : {JATO.get_impressora_jato()}")
