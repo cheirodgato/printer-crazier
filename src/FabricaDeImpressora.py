@@ -6,27 +6,29 @@ from ImpressoraLaser import LaserFactory
 class IFabricaDeImpressora(ABC):
 
     @abstractmethod
-    def make_impressora_laser(self) -> object:
+    def make_impressora_laser():
         pass
 
     @abstractmethod
-    def make_impressora_jato(self) -> object:
+    def make_impressora_jato():
         pass
 
 
 class ImpressoraHPFactory(IFabricaDeImpressora):
-
-    def make_impressora_laser(self):
+    @staticmethod
+    def make_impressora_laser():
         return LaserFactory.get_laser_hp()
 
-    def make_impressora_jato(self):
+    @staticmethod
+    def make_impressora_jato():
         return JatoFactory.get_jato_hp()
 
 
 class ImpressoraEpsonFactory(IFabricaDeImpressora):
+    @staticmethod
+    def make_impressora_laser():
+        return LaserFactory.get_laser_epson()
 
-    def make_impressora_laser(self):
-        return LaserFactory.get_laser_epson(self)
-
-    def make_impressora_jato(self):
-        return JatoFactory.get_jato_epson(self)
+    @staticmethod
+    def make_impressora_jato():
+        return JatoFactory.get_jato_epson()

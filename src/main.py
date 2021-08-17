@@ -1,6 +1,12 @@
 from CentralPrint import CentralPrint
 
 
-if __name__ == '__main__':
-  main = CentralPrint.get_instancia()
-  main.create()
+class Main:
+    @staticmethod
+    def init():
+        CentralPrint.get_instancia()
+        CentralPrint.create()
+        CentralPrint.show(CentralPrint())
+
+
+Main.init()

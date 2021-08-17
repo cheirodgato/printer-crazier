@@ -29,16 +29,16 @@ class ImplaserEpson(ILaser):
 class LaserFactory:
 
     @staticmethod
-    def get_laser_hp(self):
-        return ImplaserHP()
+    def get_laser_hp():
+        return ImplaserHP.get_impressora_laser()
 
     @staticmethod
-    def get_laser_epson(self):
-        return ImplaserEpson()
+    def get_laser_epson():
+        return ImplaserEpson.get_impressora_laser()
 
 
-# if __name__ == "__main__":
-#     laser = LaserFactory.get_laser("implaserHP")
-#     print(f"{laser.__class__} : {laser.get_impressora_laser()}")
-#     laser = LaserFactory.get_laser("implaserEpson")
-#     print(f"{laser.__class__} : {laser.get_impressora_laser()}")
+if __name__ == "__main__":
+    laser = LaserFactory.get_laser_hp()
+    print(f"{laser.__class__} : {laser.get_impressora_laser()}")
+    laser = LaserFactory.get_laser_epson()
+    print(f"{laser.__class__} : {laser.get_impressora_laser()}")

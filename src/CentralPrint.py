@@ -1,10 +1,11 @@
-from typing import Type
+from typing import List, Any
 
 from CriadorDeFabrica import CriadorDeFabrica
 from FabricaDeImpressora import IFabricaDeImpressora
 
+
 class CentralPrint:
-    impressorasDisponiveis = []
+    impressoras: List[Any] = []
 
     def __init__(self):
         pass
@@ -18,23 +19,23 @@ class CentralPrint:
     def get_instancia(cls):
         return cls()
 
-    def make(self):
-        Laser = self.make_impressora_laser()
-        Jato = self.make_impressora_jato()
-        return [Laser, Jato]
-
     @classmethod
     def create(cls):
-        Fabrica = CriadorDeFabrica()
-
-        EpsonLTDA = Fabrica.fabrica_epson()
-        HPLTDA = Fabrica.fabrica_hp()
+        EpsonLTDA = CriadorDeFabrica.fabrica_epson()
+        HPLTDA = CriadorDeFabrica.fabrica_hp()
 
         cls.save(cls.make(EpsonLTDA))
         cls.save(cls.make(HPLTDA))
 
-        return 0
-
     @classmethod
-    def save(cls, impressoras: []):
-        cls.impressorasDisponiveis = cls.impressorasDisponiveis + impressoras
+    def save(cls, impressoras):
+        cls.impressoras += impressoras
+
+    def make(self: IFabricaDeImpressora):
+        Laser = self.make_impressora_laser()
+        Jato = self.make_impressora_jato()
+        return [Laser, Jato]
+
+    def show(self):
+        for impressora in self.impressoras:
+            print(impressora)
