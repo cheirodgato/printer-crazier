@@ -29,11 +29,11 @@ class JatoFactory:
 
     @staticmethod
     def get_jato_hp():
-        return ImpjatoHP().get_impressora_jato()
+        return ImpjatoHP()
 
     @staticmethod
     def get_jato_epson():
-        return ImpjatoEpson().get_impressora_jato()
+        return ImpjatoEpson()
 
 # if __name__ == "__main__":
 #     JATO = JatoFactory.get_jato("impjatoHP")

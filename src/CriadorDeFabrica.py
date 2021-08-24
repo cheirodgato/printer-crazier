@@ -2,10 +2,9 @@ from FabricaDeImpressora import ImpressoraHPFactory, ImpressoraEpsonFactory
 
 
 class CriadorDeFabrica:
-    @staticmethod
-    def fabrica_epson():
+
+    def fabrica_epson(self):
         return ImpressoraEpsonFactory()
 
-    @staticmethod
-    def fabrica_hp():
+    def fabrica_hp(self):
         return ImpressoraHPFactory()
