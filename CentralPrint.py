@@ -1,9 +1,10 @@
 from typing import Type
 
 from CriadorDeFabrica import CriadorDeFabrica
-from FabricaDeImpressora import IFabricaDeImpressora
+
 
 class CentralPrint:
+    _instancia = None
     impressorasDisponiveis = []
 
     def __init__(self):
@@ -37,4 +38,8 @@ class CentralPrint:
 
     @classmethod
     def save(cls, impressoras: []):
-        cls.impressorasDisponiveis = cls.impressorasDisponiveis + impressoras
+        cls.impressorasDisponiveis.append(impressoras)
+
+    def show(self):
+        for impressora in self.impressorasDisponiveis:
+            print(impressora)
